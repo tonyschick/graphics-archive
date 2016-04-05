@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #eee;
+  shape-rendering: crispEdges;
+}
+
+.label {
+  fill: #333;
+}
+
+.tick {
+  fill: #333;
+}
+
+.dot {
+  stroke: #000;
+}
+
+</style>
+<body>
+
+  <h3>Arsenic</h3>
+  <div id="arsenic-container"></div>
+  <hr />
+
+  <h3>Lead</h3>
+  <div id="lead-container"></div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script>
+
+var pagewidth = $( "body" ).width();
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = pagewidth - margin.left - margin.right,
+    height = 100 - margin.top - margin.bottom;
+
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.category10();
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+// ARSENIC 
+var Arsenicsvg = d3.select("#arsenic-container").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.tsv("data.tsv", function(error, data) {
+  if (error) throw error;
+
+  data.forEach(function(d) {  
+    // d.sepalLength = +d.sepalLength;
+    d.As = +d.As;
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.As; })).nice();
+  y.domain(d3.extent(data, function(d) { return 100; })).nice();
+
+  Arsenicsvg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Parts per million");
+
+theline = Arsenicsvg.append('line')
+    .attr('x1',x(20))
+    .attr('x2',x(20))
+    .attr('y1',55)
+    .attr('y2',0)
+    .style("stroke-width", "1.5px")
+    .style("stroke", "red")
+    
+    Arsenicsvg
+      .append("text")
+      .text("WA state cleanup level")
+      .style("fill", "red")
+      .attr("x", x(21))
+      .attr("y", 5)
+
+  Arsenicsvg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", function(d) { return x(d.As); })
+      .attr("cy", function(d) { return 25; })
+      .style("fill", function(d) { return "steelblue"; })
+      .style("opacity", "0.75")
+      .style("stroke", "black")
+      .style("weight", "0.25px");
+
+  var legend = Arsenicsvg.selectAll(".legend")
+      .data(color.domain())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+});
+
+
+/// LEAD 
+
+var Leadsvg = d3.select("#lead-container").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.tsv("data.tsv", function(error, data) {
+  if (error) throw error;
+
+  data.forEach(function(d) {  
+    // d.sepalLength = +d.sepalLength;
+    d.Pb = +d.Pb;
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.Pb; })).nice();
+  y.domain(d3.extent(data, function(d) { return 100; })).nice();
+
+  Leadsvg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Parts per million");
+
+Leadsvg.append('line')
+    .attr('x1',x(250))
+    .attr('x2',x(250))
+    .attr('y1',55)
+    .attr('y2',0)
+    .style("stroke-width", "1.5px")
+    .style("stroke", "red")
+
+  Leadsvg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", function(d) { return x(d.Pb); })
+      .attr("cy", function(d) { return 25; })
+      .style("fill", function(d) { return "steelblue"; })
+      .style("opacity", "0.75")
+      .style("stroke", "black")
+      .style("weight", "0.25px");
+
+  var legend = Leadsvg.selectAll(".legend")
+      .data(color.domain())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+});
+
+</script>

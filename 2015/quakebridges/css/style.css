@@ -1,0 +1,45 @@
+body { 
+  margin:0; padding:0; 
+}
+
+p, h3 {
+  cursor: pointer;
+}
+
+#map { 
+  position: absolute; top:0; bottom:0; right:0; left:0; 
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  /*background-color: #fff;*/
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  max-width: 260px;
+/*  height: 400px;*/  
+  z-index: 99999;
+  cursor: pointer;
+}
+
+.vulnerable {
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #fc4e2a;
+  width: 10px;
+  height: 10px;
+}
+
+.potentiallyvulnerable {
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #fed976;
+  width: 10px;
+  height: 10px;
+}
+
+.popuptext {
+  font-weight: lighter;
+  font: 12px/14px Arial, Helvetica, sans-serif;
+}

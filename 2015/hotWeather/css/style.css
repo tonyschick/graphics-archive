@@ -1,0 +1,96 @@
+body {
+  font: 14px sans-serif;
+}
+
+p {
+  font-family: georgia;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  color: #444;
+  max-width: 35em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/*
+.x.axis path {
+  display: none;
+}
+*/
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #3182bd;
+  fill: rgba(49,130,189,1);
+}
+/*
+.dot:hover {
+  stroke: #3182bd;
+  fill: rgba(49,130,189,0.9);
+}*/
+
+.tooltip {
+  position: absolute;
+  /*width: 200px;*/
+  /*height: 36px;*/
+  pointer-events: none;
+  background-color: rgba(255,255,255,0.95);
+  padding: 6px;
+  border: 1px solid #ddd;
+}
+
+#buttonContainer {
+  position: relative;
+  width: 210px;
+  margin: 20px auto;
+}
+
+button {
+  background-color:#eee;
+  border:1px solid #999;
+  cursor:pointer;
+  color:#444;
+  font-family:Arial;
+  font-size:16px;
+  width: 100px;
+  height: 44px;
+  text-decoration:none;
+}
+
+button:hover {
+  background-color:#f6f6f6;
+}
+
+button:focus {outline:0;}
+
+
+#next{
+  -moz-border-radius: 0px 6px 6px 0px;
+  -webkit-border-radius: 0px 6px 6px 0px;
+  border-radius: 0px 6px 6px 0px;
+}
+
+#last {
+  -moz-border-radius: 6px 0px 0px 6px;
+  -webkit-border-radius: 6px 0px 0px 6px;
+  border-radius: 6px 0px 0px 6px;
+}
+
+.inactive {
+  pointer-events:none;
+    background-color:#fff;
+  color:#aaa;
+  border:1px solid #dcdcdc;
+
+}

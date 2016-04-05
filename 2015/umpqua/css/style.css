@@ -1,0 +1,36 @@
+html, body {
+	padding: 0;
+	margin: 0;
+  width:auto;
+	height:auto;
+}
+
+p {
+  	font-family: Georgia,Times,Times New Roman,serif;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+ }
+
+/*LEAFLET STYLE OVERRIDES*/
+
+.leaflet-popup-content-wrapper {
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.leaflet-popup-tip{
+  background-color: #fff;
+}
+
+.leaflet-popup-content {
+  font-size: 1.125em;
+  color: #363636;
+}
+
+.leaflet-popup-content h4{
+  font-size: 20px;
+  line-height: 0;
+}

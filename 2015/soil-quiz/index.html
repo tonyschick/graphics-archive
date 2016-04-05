@@ -1,0 +1,114 @@
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script src="http://www.opb.org/s/vendor/jquery/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/vendor/modernizr.js"></script>
+  <script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/foundation.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/style.css" />
+
+
+</head>
+<body>
+
+
+
+ 
+<!-- START BUTTON -->
+<div id="quiz-start">
+	<div class="small-12 small-offset-4">
+		<div id="start-button" class="button">Find Out</div>
+	</div>
+</div>
+
+<div id="low-probability">
+	<div class="row">
+		<div class="small-4 small-offset-5">
+			<div class="button success">LOW</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-7 small-offset-2">
+			<p>You have a low probability of contamination from lead and arsenic, but the only way to know for sure is to test your soil.</p>
+		</div>
+	</div>
+</div>
+
+<!-- PROBABILITY RESULTS -->
+<div id="high-probability">
+	<div class="row">
+		<div class="small-4 small-offset-5">
+			<div class="button alert">HIGH</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-7 small-offset-2">
+			<p>You have a high probability of contamination from lead and arsenic. You should consult with experts and get your soil tested to help avoid potential exposure.</p>
+		</div>
+	</div>
+</div>
+
+<div id="unknown-probability">
+	<div class="row">
+		<div class="small-4 small-offset-4">
+			<div class="button info">UNKNOWN</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-7 small-offset-2">
+			<p>The questions were inconclusive. You have an unknown probability of contamination from lead and arsenic. Testing your soil is the only way to know for sure.</p>
+		</div>
+	</div>
+</div>
+
+
+<!-- START OVER BUTTON -->
+	<!-- <div class="row">
+
+	<div id="startover" class="small-2 small-offset-5">
+		<center>
+		<i class="fa fa-refresh"></i>
+		Start over
+	</center>
+	</div>
+
+	</div> -->
+
+<!-- QUESTION -->
+ <div class="row">
+  	<div class="small-8 small-offset-2">
+	  	<p id="question"></p>
+	</div>
+ </div>
+
+<!-- YES/NO BUTTONS -->
+ <div id="quiz-buttons">
+	 <div class="row">
+			  	<div class="small-1 small-offset-2 columns">
+			  		<div class="button secondary" id="yes">Yes</div>
+			  	</div>
+			  	<div class="small-1 small-offset-1 columns">
+			  		<div class="button secondary" id="no">No</div>
+			  	</div>
+			  	<div class="small-1 small-offset-1 columns end">
+			  		<div class="button secondary" id="dontknow">Unsure</div>
+			  	</div>
+
+	 </div>
+ </div>
+
+  <script src="js/project.js"></script>
+
+  <script type="text/javascript" src="http://opb-news-interactives.s3.amazonaws.com/lib/pym.js"></script>
+  <script type="text/javascript">
+    var pymChild = new pym.Child();
+  </script>
+
+</body>
