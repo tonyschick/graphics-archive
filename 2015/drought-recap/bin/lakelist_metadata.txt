@@ -1,1 +1,0 @@
-['# Metadata Report\n', '#\n', '# (As of: Fri Oct 23 00:06:24 PDT 2015)\n', '#  **Provisional data, subject to revision**\n', '#\n']

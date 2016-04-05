@@ -1,8 +1,0 @@
-var petrolpipes = {
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-                                                                                
-"features": [
-{ "type": "Feature", "properties": { "Opername": "ENBRIDGE", "Pipename": "Olympic", "Source": "EIA using publicly available data" }, "geometry": { "type": "LineString", "coordinates": [ [ -122.764373174133908, 45.4946189715644 ], [ -122.838890788622479, 46.692220571454314 ], [ -122.592470035127121, 46.998999582126771 ], [ -122.325500291659736, 47.175724552640887 ], [ -122.088195284138138, 47.482326081873723 ], [ -122.036286305226852, 48.060467406137214 ], [ -122.318090505699317, 48.705665147526503 ], [ -122.745999766337789, 48.993900271074793 ] ] } }
-]
-}

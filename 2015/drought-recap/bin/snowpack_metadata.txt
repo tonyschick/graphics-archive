@@ -1,1 +1,0 @@
-['# Monthly Data for Oct 2015\n', '#\n', '# (As of: Fri Oct 23 00:06:23 PDT 2015)\n', '#  **Provisional data, subject to revision**\n', '#\n']
