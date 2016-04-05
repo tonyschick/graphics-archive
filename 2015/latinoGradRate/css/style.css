@@ -1,0 +1,54 @@
+
+		body {
+		   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		   /*font-weight: 300;*/
+		}
+
+		text {
+			font-size: 1.25em;
+			fill:#444;
+		}
+
+		.average {
+			font-size: 0.875em;
+			text-anchor: middle;
+			font-weight: bold;
+		}
+
+		.data {
+			font-size: 0.875em;
+			fill:#444;
+		
+		}
+
+		.bar {
+		  fill: #02818a;
+		}
+
+
+		.axis {
+		  font: 10px sans-serif;
+		}
+
+		.axis path,
+		.axis line {
+		  fill: none;
+		  stroke: #444;
+		  shape-rendering: crispEdges;
+
+		}
+
+		.x path {
+		  display: none;
+		}
+
+		.y path,
+		.y line {
+		  display: none;
+		}
+
+		.line {
+		  fill: none;
+		  stroke: #e31a1c;
+		  stroke-width: 1.5px;
+		}

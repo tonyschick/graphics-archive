@@ -1,0 +1,109 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: georgia;
+  font-size: 1.125em;
+  line-height: 1.5em;
+  color: #444;
+  max-width: 35em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#map { 
+  height: 400px;
+  width: 100%;
+ }
+
+/*LEAFLET STYLE OVERRIDES*/
+
+.leaflet-popup-content-wrapper {
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.leaflet-popup-tip{
+  background-color: #fff;
+}
+
+.leaflet-popup-content {
+  font-size: 1.125em;
+  color: #363636;
+}
+
+.leaflet-popup-content h4{
+  font-size: 20px;
+  line-height: 0;
+}
+
+button {
+  background-color:#eee;
+  border:1px solid #999;
+  cursor:pointer;
+  color:#444;
+  font-family:Arial;
+  font-size:16px;
+  width: 100px;
+  height: 44px;
+  text-decoration:none;
+}
+
+button:hover {
+  background-color:#f6f6f6;
+}
+
+button:focus {outline:0;}
+
+
+#next{
+  -moz-border-radius: 0px 6px 6px 0px;
+  -webkit-border-radius: 0px 6px 6px 0px;
+  border-radius: 0px 6px 6px 0px;
+}
+
+#last {
+  -moz-border-radius: 6px 0px 0px 6px;
+  -webkit-border-radius: 6px 0px 0px 6px;
+  border-radius: 6px 0px 0px 6px;
+}
+
+.inactive {
+  pointer-events:none;
+    background-color:#fff;
+  color:#aaa;
+  border:1px solid #dcdcdc;
+
+}
+
+#buttonContainer {
+  position: relative;
+  width: 210px;
+  margin: 20px auto;
+}
+
+#stepDescription{
+  padding: 0 2em 2em 2em;
+}
+
+@media (max-width: 500px) {
+#map { 
+  height: 260px;
+ }
+
+#stepDescription{
+  padding: 0;
+}
+
+p {
+  font-size: 1em;
+}
+
+}

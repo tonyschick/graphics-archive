@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OPB &middot; School Funding</title>
+
+<!-- <link rel="stylesheet" href="http://www.opb.org/s/vendor/foundation/app.css?v=2">
+<link rel="stylesheet" href="http://www.opb.org/s/css/text.css?v=2">
+<link rel="stylesheet" href="http://www.opb.org/s/css/style.css?v=2">
+<link rel="stylesheet" href="http://www.opb.org/s/css/override-external.css">
+<script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/vendor/modernizr.js"></script>  
+<script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/foundation.min.js"></script>    
+ -->
+
+<script src="http://www.opb.org/s/vendor/jquery/jquery-1.7.1.min.js"></script>
+
+<style>
+
+body {
+  font: 14px sans-serif;
+}
+
+p {
+  font-family: georgia;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  color: #444;
+  max-width: 35em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #3182bd;
+  fill: rgba(49,130,189,0.4);
+}
+
+.dot:hover {
+  stroke: #3182bd;
+  fill: rgba(49,130,189,0.9);
+}
+
+.tooltip {
+  position: absolute;
+  /*width: 200px;*/
+  /*height: 36px;*/
+  pointer-events: none;
+  background-color: rgba(255,255,255,0.95);
+  padding: 6px;
+  border: 1px solid #ddd;
+}
+
+#buttonContainer {
+  position: relative;
+  width: 210px;
+  margin: 20px auto;
+}
+
+button {
+  background-color:#eee;
+  border:1px solid #999;
+  cursor:pointer;
+  color:#444;
+  font-family:Arial;
+  font-size:16px;
+  width: 100px;
+  height: 44px;
+  text-decoration:none;
+}
+
+button:hover {
+  background-color:#f6f6f6;
+}
+
+button:focus {outline:0;}
+
+
+#next{
+  -moz-border-radius: 0px 6px 6px 0px;
+  -webkit-border-radius: 0px 6px 6px 0px;
+  border-radius: 0px 6px 6px 0px;
+}
+
+#last {
+  -moz-border-radius: 6px 0px 0px 6px;
+  -webkit-border-radius: 6px 0px 0px 6px;
+  border-radius: 6px 0px 0px 6px;
+}
+
+.inactive {
+  pointer-events:none;
+    background-color:#fff;
+  color:#aaa;
+  border:1px solid #dcdcdc;
+
+}
+
+</style>
+</head>
+<body>
+
+<div style="height:180px;">
+
+  <div id="buttonContainer">
+    <button id="last" class="inactive">Previous</button>
+    <button id="next">Next</button>
+  </div>
+
+   <p id="stepDescription">In this step-by-step graphic, each blue circle represents a school district. School districts under 500 students are intentionally left out of this graphic to show a better representation of funding per student. If you are looking data on a smaller district, you can find it <a href="http://www.ode.state.or.us/search/results/?id=168">here</a>.</p>
+</div>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var docWidth = $(document).width();
+
+var margin = {top: 20, right: 40, bottom: 30, left: 40},
+    width = docWidth - margin.left - margin.right,
+    height = 450 - margin.top - margin.bottom;
+
+function getRadius(A){  
+  var radius = Math.sqrt( A / Math.PI );
+  return Math.round(radius * 10) / 10;
+};
+
+var x = d3.scale.linear()
+    // .domain([0,12000])
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .domain([0,900])
+    .range([height, 0]);
+
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    // .tickFormat(function(d) { return "$" + (d); })
+    .tickFormat(function(d) { return "$" + (d/1000000) + "M"; });
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(function(d) { return "$" + (d); });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+d3.tsv("funding3.tsv", function(error, data) {
+  data.forEach(function(d) {
+    d.privateAverage = +d.privateAverage;
+    d.publicAverage = +d.publicAverage;
+    // d.Enrollment2013 = +d.Enrollment2013;
+    d.public2013 = +d.public2013;
+    d.boosterByStudent = +d.boosterByStudent;
+    d.enrollmentAverage = +d.enrollmentAverage;
+
+  });
+
+
+  x.domain(d3.extent(data, function(d) { return d.public2013; })).nice();
+
+  // x.domain(d3.extent(data, function(d) { return d.publicAverage; })).nice();
+  // y.domain(d3.extent(data, function(d) { return d.privateAverage; })).nice();
+
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("State Funding Per Student Average");
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Private Fundraising Per Student Average")
+
+      svg.select(".y").style("opacity", 0);
+      svg.select(".x").style("opacity", 0);
+
+
+var dots = svg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", function(d) {return d.Institution_Name + " dot"})
+      // .attr("r", 5)
+      // .attr("cx", function(d) { return x(d.publicAverage); })
+      // .attr("cy", function(d) { return y(d.privateAverage + d.boosterByStudent); })
+      .on("mouseover", function(d) {
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html( "<b> School District:</b> " + d.Institution_Name + "</br> " + "<b>2013 - 2014 Enrollment: </b>" + d.Enrollment2013 )
+              .style("top", (d3.event.pageY) + "px")
+              .style("left", (d3.event.pageX + 16) + "px");
+        })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", 0);
+        });
+
+
+
+  var step = 0;
+
+  d3.select("#next").on("click", function() {
+    if (step <= 4){
+      step = ++step;
+    } 
+    stepper(step);
+    console.log(step);
+  });
+
+  d3.select("#last").on("click", function() {
+    if (step >= 1){
+      step = --step;
+    } 
+    stepper(step);
+    console.log(step);
+  });
+
+function stepper(){
+
+  switch(step) {
+        case 0:
+
+
+         d3.select("#stepDescription").html("In this step-by-step graphic, each blue circle represents a school district. School districts under 500 students are intentionally left out of this graphic to show a better representation of funding per student. If you are looking data on a smaller district, you can find it <a href='http://www.ode.state.or.us/search/results/?id=168'>here</a>.");
+
+         svg.select(".x").transition().style("opacity", 0);
+
+         d3.select("#last").attr("class", "inactive");
+
+         break;
+
+        case 1:
+          x.domain(d3.extent(data, function(d) { return d.public2013; })).nice()
+
+          xAxis.tickFormat(function(d) { return "$" + (d/1000000) + "M"; });
+
+          svg.select(".x")
+              .transition().duration(1500)
+              .call(xAxis)
+            .select(".label")
+              .text("State Funding");
+
+          svg.select(".y").transition().style("opacity", 0);
+          svg.select(".x").transition().style("opacity", 1);
+
+
+          dots.transition()
+              .attr("cy", height - 120)
+              .attr("cx", function(d) { return x(d.public2013); })
+              .attr("r", function(d) { return ( getRadius(d.enrollmentAverage) / 2) ;})
+              .duration(1000);
+
+          d3.select("#stepDescription").html("A school district's total student enrollment plays the largest part in how much state and federal funding. In this step, we simply see that districts with more student – bigger circles – recieve more funding.");
+
+          d3.select("#last").attr("class", "active");
+
+          break;
+
+        case 2:
+          x.domain(d3.extent(data, function(d) { return d.publicAverage; })).nice();
+
+          xAxis.tickFormat(function(d) { return "$" + d; });
+
+          svg.select(".y").transition().style("opacity", 0);;
+
+          svg.select(".x")
+              .transition().duration(1500)
+              .call(xAxis)
+            .select(".label")
+              .text("State Funding Per Student");
+
+          dots.transition()
+              .attr("cy", height - 120)
+              .attr("cx", function(d) { return x(d.publicAverage); })
+              .attr("r", 5)
+              .duration(1000)
+
+          d3.select("#stepDescription").html("On top of the basic budget, Texas gives extra money for students who need more support, like English-language learners and low-income students. The state gives extra add-on money for them. It’s called a “weight.” Think of it like a percentage.");
+
+          break;
+
+        case 3:
+          dots.transition().duration(1000)
+              .attr("cy", function(d) { return y(d.privateAverage); })
+  
+          svg.select(".y").transition().style("opacity", 1);;
+
+          d3.select("#stepDescription").html("Addin 1920 funds");
+
+          d3.select("#next").attr("class", "active");
+
+          break;
+
+        case 4:
+          dots.transition().duration(1000)
+              .attr("cy", function(d) { return y(d.privateAverage + d.boosterByStudent); })
+  
+              // svg.select(".y").transition().style("opacity", 1);;
+
+          d3.select("#stepDescription").html("Adding 1700 funds");
+
+
+          break;
+
+        case 5:
+          dots.transition().duration(1000).attr("r", function(d) { return ( getRadius(d.enrollmentAverage) / 2) ;})
+
+          d3.select("#stepDescription").html("Enrollment");
+
+          d3.select("#next").attr("class", "inactive");
+
+          break;
+    }
+
+}
+
+
+// console.log(data);
+
+
+});
+
+
+</script>
+
+  </body>
+
+</html>
+

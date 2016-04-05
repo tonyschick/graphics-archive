@@ -1,0 +1,7 @@
+*.py[co]
+*.sw[op]
+*.xlsx
+*/.DS_Store
+.DS_Store
+.DS_Store?
+fabfile.pyc

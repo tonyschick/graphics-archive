@@ -1,0 +1,58 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OPB &middot; Drought Declarations 2015</title>
+
+<link rel="stylesheet" href="http://www.opb.org/s/vendor/foundation/app.css?v=2">
+<link rel="stylesheet" href="css/style.css">
+
+<script src="http://www.opb.org/s/vendor/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/vendor/modernizr.js"></script>  
+<script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/foundation.min.js"></script>    
+
+<script type="text/javascript" src="http://opb-news-interactives.s3.amazonaws.com/lib/pym.js"></script>
+
+<script src="http://s3-us-west-2.amazonaws.com/opb-news-interactives/lib/d3/d3.js"></script>
+<script src="http://s3-us-west-2.amazonaws.com/opb-news-interactives/lib/d3/queue.js"></script>
+<script src="http://s3-us-west-2.amazonaws.com/opb-news-interactives/lib/d3/topojson.js"></script>
+
+
+
+</head>
+<body>
+
+<div id="graphicContainer">
+
+<div class="row">
+  <div class="small-12 large-7 column">
+    <div id="map"></div>
+    <div class="legend">
+      <div id="declaredLegend"></div>
+      <p>Governor Declared</p>
+      <div id="requestedLegend"></div>
+      <p>County&nbsp;Requested</p>
+    </div>
+  </div>
+  <div class="small-12 large-5 show-for-large-up column">
+    <div id="table"></div>
+  </div>
+</div>
+
+</div>
+
+
+<script src="js/project.js"></script>
+<!-- function drawGraphic(width) {
+    ...
+} -->
+
+<script type="text/javascript">
+  // var pymChild = new pym.Child({polling:500});
+  // var pymChild = new pym.Child({ renderCallback: drawGraphic });
+
+  </script>
+
+</body>
+</html>

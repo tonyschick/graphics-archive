@@ -1,0 +1,48 @@
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="http://opb-news-interactives.s3.amazonaws.com/lib/pym.js"></script>
+
+  <!-- SWITCH FROM CDN TO OPB HOST BEFORE YOU PUSH? -->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="//cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+
+  <!-- DON'T FORGET YOUR GEOGRAPHY JSON FILES  -->
+  <script src="js/ppsStudentOfColor3.geojson"></script>
+
+
+</head>
+
+<body>
+
+<div id='legend'>
+  <!-- <strong>The Title or Explanation of your Map</strong> -->
+  <nav class='legend clearfix'>
+    <span style='background:#74add1;'></span>
+    <span style='background:#abd9e9;'></span>
+    <span style='background:#e0f3f8;'></span>
+    <span style='background:rgba(250,250,250,0.7);'></span>
+    <span style='background:#fee090;'></span>
+    <span style='background:#fdae61;'></span>
+    <span style='background:#f46d43;'></span>
+    <label>Less Racially Diverse</label>
+    <label style="float: right; text-align:right;">More Racially Diverse</label>
+    <!-- <small>Source: <a href="#link to source">Name of source</a></small> -->
+</div>
+
+  <div id="map"></div>
+
+<script src="js/project.js"></script>
+<script type="text/javascript">
+  var pymChild = new pym.Child();
+  </script>
+
+</body>

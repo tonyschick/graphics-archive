@@ -1,0 +1,1150 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OPB &middot; Lake Levels</title>
+
+	<link rel="stylesheet" href="http://www.opb.org/s/vendor/foundation/app.css?v=2">
+  <link rel="stylesheet" href="css/style.css">
+
+	<script src="http://www.opb.org/s/vendor/jquery/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/vendor/modernizr.js"></script>
+	<script type="text/javascript" src="http://www.opb.org/s/vendor/foundation/js/foundation.min.js"></script>
+
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="http://opb-news-interactives.s3.amazonaws.com/lib/pym.js"></script>
+
+  <script src="js/sparkline.js"></script>
+
+</head>
+
+<body>
+
+  <div id="stepper" class="hide-for-small">
+
+    <div class="noselect" id="buttonContainer">
+      <button id="last" class="inactive">Previous</button>
+      <button id="next">Next</button>
+    </div>
+
+     <p id="stepDescription">Each line represents 1 of 63 monitored reservoirs in Oregon and Washington. You can see how reservoir levels rise <span style="color:#0571b0; font-weight:bold;">above average</span> in wetter summers and drop <span style="color:#ca0020; font-weight:bold;">below average</span> in drier summers.</p>
+  </div>
+
+ <div class="row">
+    <div id="multiLineChart" class="hide-for-small"></div>
+    <div id="multiLineChart" class="show-for-small-only">
+
+      <img src="img/1-6.png">
+      <p>Each line represents 1 of 63 monitored reservoirs in Oregon and Washington. You can see how reservoir levels rise <span style="color:#0571b0; font-weight:bold;">above average</span> in wetter summers and drop <span style="color:#ca0020; font-weight:bold;">below average</span> in drier summers.</p>
+      <img src="img/2.png">
+      <p>It was extremely dry this year. Most reservoirs were below their summer average, but nine reached their lowest storage on record this summer.</p>
+      <img src="img/3.png">
+      <p>Some lakes have a lot of natural variation.</p>
+      <img src="img/4.png">
+      <p>Some don't.</p>
+      <img src="img/5.png">
+      <p>Dips like this year's aren't unheard of. The mid-2000s, mid-1990s, and each decade before it showed similar rise and fall across the Northwest.</p>
+      <img src="img/1-6.png">
+      <p>Drier than before? The past 100 years of data show reservoirs in the Northwest have spiked below average further and with more frequency since 1990.</p>
+
+
+    </div>
+
+  </div>
+
+  <div class="row tableHeader">
+    <div class="small-6 large-4 column">
+      <h6>Reservoir</h6>
+    </div>
+    <div class="small-3 large-2 column">
+      <h6>Water Level</h6>
+    </div>
+    <div class="small-3 large-2 column">
+      <h6>Area Snowpack</h6>
+    </div>
+    <div class="small-12 large-4 column hide-for-small-only">
+      <h6>Average July Level</h6>
+    </div>
+  </div>
+
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Applegate  Lake</br>
+          <small>Jackson, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-104" data-lake-id="lake-level-104" data-lake-name="Applegate"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-104" data-snow-id="snow-level-104" data-lake-name="Applegate"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-104" data-chart-id="lake-levels-chart-104" data-lake-name="Applegate"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Beulah  Lake</br>
+          <small>Malheur, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-105" data-lake-id="lake-level-105" data-lake-name="Beulah"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-105" data-snow-id="snow-level-105" data-lake-name="Beulah"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-105" data-chart-id="lake-levels-chart-105" data-lake-name="Beulah"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Blue River  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-106" data-lake-id="lake-level-106" data-lake-name="Blue River"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-106" data-snow-id="snow-level-106" data-lake-name="Blue River"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-106" data-chart-id="lake-levels-chart-106" data-lake-name="Blue River"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Bully Creek  Lake</br>
+          <small>Malheur, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-107" data-lake-id="lake-level-107" data-lake-name="Bully Creek"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-107" data-snow-id="snow-level-107" data-lake-name="Bully Creek"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-107" data-chart-id="lake-levels-chart-107" data-lake-name="Bully Creek"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Bumping Lake  </br>
+          <small>Yakima, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-147" data-lake-id="lake-level-147" data-lake-name="Bumping Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-147" data-snow-id="snow-level-147" data-lake-name="Bumping Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-147" data-chart-id="lake-levels-chart-147" data-lake-name="Bumping Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Cle Elum  Lake</br>
+          <small>Kittitas, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-148" data-lake-id="lake-level-148" data-lake-name="Cle Elum"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-148" data-snow-id="snow-level-148" data-lake-name="Cle Elum"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-148" data-chart-id="lake-levels-chart-148" data-lake-name="Cle Elum"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Clear Lake  </br>
+          <small>Wasco, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-108" data-lake-id="lake-level-108" data-lake-name="Clear Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-108" data-snow-id="snow-level-108" data-lake-name="Clear Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-108" data-chart-id="lake-levels-chart-108" data-lake-name="Clear Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Cold Springs  Lake</br>
+          <small>Umatilla, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-109" data-lake-id="lake-level-109" data-lake-name="Cold Springs"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-109" data-snow-id="snow-level-109" data-lake-name="Cold Springs"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-109" data-chart-id="lake-levels-chart-109" data-lake-name="Cold Springs"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Conconully Lake </br>(Salmon Lake Dam)  </br>
+          <small>Okanogan, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-149" data-lake-id="lake-level-149" data-lake-name="Conconully Lake (Salmon Lake Dam)"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-149" data-snow-id="snow-level-149" data-lake-name="Conconully Lake (Salmon Lake Dam)"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-149" data-chart-id="lake-levels-chart-149" data-lake-name="Conconully Lake (Salmon Lake Dam)"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Conconully Reservoir  </br>
+          <small>Okanogan, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-150" data-lake-id="lake-level-150" data-lake-name="Conconully Reservoir"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-150" data-snow-id="snow-level-150" data-lake-name="Conconully Reservoir"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-150" data-chart-id="lake-levels-chart-150" data-lake-name="Conconully Reservoir"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Cottage Grove  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-110" data-lake-id="lake-level-110" data-lake-name="Cottage Grove"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-110" data-snow-id="snow-level-110" data-lake-name="Cottage Grove"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-110" data-chart-id="lake-levels-chart-110" data-lake-name="Cottage Grove"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Cottonwood  Lake</br>
+          <small>Lake, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-111" data-lake-id="lake-level-111" data-lake-name="Cottonwood"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-111" data-snow-id="snow-level-111" data-lake-name="Cottonwood"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-111" data-chart-id="lake-levels-chart-111" data-lake-name="Cottonwood"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Cougar  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-112" data-lake-id="lake-level-112" data-lake-name="Cougar"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-112" data-snow-id="snow-level-112" data-lake-name="Cougar"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-112" data-chart-id="lake-levels-chart-112" data-lake-name="Cougar"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Crane Prairie  Lake</br>
+          <small>Deschutes, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-113" data-lake-id="lake-level-113" data-lake-name="Crane Prairie"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-113" data-snow-id="snow-level-113" data-lake-name="Crane Prairie"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-113" data-chart-id="lake-levels-chart-113" data-lake-name="Crane Prairie"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Crescent Lake  </br>
+          <small>Klamath, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-114" data-lake-id="lake-level-114" data-lake-name="Crescent Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-114" data-snow-id="snow-level-114" data-lake-name="Crescent Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-114" data-chart-id="lake-levels-chart-114" data-lake-name="Crescent Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Detroit  Lake</br>
+          <small>Marion, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-115" data-lake-id="lake-level-115" data-lake-name="Detroit"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-115" data-snow-id="snow-level-115" data-lake-name="Detroit"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-115" data-chart-id="lake-levels-chart-115" data-lake-name="Detroit"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Dexter  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-116" data-lake-id="lake-level-116" data-lake-name="Dexter"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-116" data-snow-id="snow-level-116" data-lake-name="Dexter"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-116" data-chart-id="lake-levels-chart-116" data-lake-name="Dexter"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Diablo Reservoir  </br>
+          <small>Whatcom, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-151" data-lake-id="lake-level-151" data-lake-name="Diablo Reservoir"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-151" data-snow-id="snow-level-151" data-lake-name="Diablo Reservoir"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-151" data-chart-id="lake-levels-chart-151" data-lake-name="Diablo Reservoir"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Dorena  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-117" data-lake-id="lake-level-117" data-lake-name="Dorena"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-117" data-snow-id="snow-level-117" data-lake-name="Dorena"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-117" data-chart-id="lake-levels-chart-117" data-lake-name="Dorena"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Drews  Lake</br>
+          <small>Lake, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-118" data-lake-id="lake-level-118" data-lake-name="Drews"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-118" data-snow-id="snow-level-118" data-lake-name="Drews"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-118" data-chart-id="lake-levels-chart-118" data-lake-name="Drews"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Emigrant Lake  </br>
+          <small>Jackson, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-119" data-lake-id="lake-level-119" data-lake-name="Emigrant Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-119" data-snow-id="snow-level-119" data-lake-name="Emigrant Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-119" data-chart-id="lake-levels-chart-119" data-lake-name="Emigrant Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Fall Creek  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-120" data-lake-id="lake-level-120" data-lake-name="Fall Creek"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-120" data-snow-id="snow-level-120" data-lake-name="Fall Creek"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-120" data-chart-id="lake-levels-chart-120" data-lake-name="Fall Creek"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Fern Ridge  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-121" data-lake-id="lake-level-121" data-lake-name="Fern Ridge"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-121" data-snow-id="snow-level-121" data-lake-name="Fern Ridge"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-121" data-chart-id="lake-levels-chart-121" data-lake-name="Fern Ridge"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Fish Lake  </br>
+          <small>Jackson, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-122" data-lake-id="lake-level-122" data-lake-name="Fish Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-122" data-snow-id="snow-level-122" data-lake-name="Fish Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-122" data-chart-id="lake-levels-chart-122" data-lake-name="Fish Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Foster  Lake</br>
+          <small>Linn, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-123" data-lake-id="lake-level-123" data-lake-name="Foster"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-123" data-snow-id="snow-level-123" data-lake-name="Foster"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-123" data-chart-id="lake-levels-chart-123" data-lake-name="Foster"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Fourmile Lake  </br>
+          <small>Klamath, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-124" data-lake-id="lake-level-124" data-lake-name="Fourmile Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-124" data-snow-id="snow-level-124" data-lake-name="Fourmile Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-124" data-chart-id="lake-levels-chart-124" data-lake-name="Fourmile Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Gerber  Lake</br>
+          <small>Klamath, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-125" data-lake-id="lake-level-125" data-lake-name="Gerber"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-125" data-snow-id="snow-level-125" data-lake-name="Gerber"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-125" data-chart-id="lake-levels-chart-125" data-lake-name="Gerber"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Gorge Reservoir  </br>
+          <small>Whatcom, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-152" data-lake-id="lake-level-152" data-lake-name="Gorge Reservoir"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-152" data-snow-id="snow-level-152" data-lake-name="Gorge Reservoir"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-152" data-chart-id="lake-levels-chart-152" data-lake-name="Gorge Reservoir"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Green Peter  Lake</br>
+          <small>Linn, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-126" data-lake-id="lake-level-126" data-lake-name="Green Peter"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-126" data-snow-id="snow-level-126" data-lake-name="Green Peter"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-126" data-chart-id="lake-levels-chart-126" data-lake-name="Green Peter"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Henry Hagg Lake  </br>
+          <small>Washington, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-127" data-lake-id="lake-level-127" data-lake-name="Henry Hagg Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-127" data-snow-id="snow-level-127" data-lake-name="Henry Hagg Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-127" data-chart-id="lake-levels-chart-127" data-lake-name="Henry Hagg Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Hills Creek  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-128" data-lake-id="lake-level-128" data-lake-name="Hills Creek"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-128" data-snow-id="snow-level-128" data-lake-name="Hills Creek"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-128" data-chart-id="lake-levels-chart-128" data-lake-name="Hills Creek"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Howard Hansen  Lake</br>
+          <small>King, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-153" data-lake-id="lake-level-153" data-lake-name="Howard Hansen"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-153" data-snow-id="snow-level-153" data-lake-name="Howard Hansen"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-153" data-chart-id="lake-levels-chart-153" data-lake-name="Howard Hansen"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Howard Prairie  Lake</br>
+          <small>Jackson, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-129" data-lake-id="lake-level-129" data-lake-name="Howard Prairie"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-129" data-snow-id="snow-level-129" data-lake-name="Howard Prairie"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-129" data-chart-id="lake-levels-chart-129" data-lake-name="Howard Prairie"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Hyatt Prairie  Lake</br>
+          <small>Jackson, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-130" data-lake-id="lake-level-130" data-lake-name="Hyatt Prairie"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-130" data-snow-id="snow-level-130" data-lake-name="Hyatt Prairie"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-130" data-chart-id="lake-levels-chart-130" data-lake-name="Hyatt Prairie"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Kachess  Lake</br>
+          <small>Kittitas, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-154" data-lake-id="lake-level-154" data-lake-name="Kachess"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-154" data-snow-id="snow-level-154" data-lake-name="Kachess"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-154" data-chart-id="lake-levels-chart-154" data-lake-name="Kachess"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Keechelus  Lake</br>
+          <small>Kittitas, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-155" data-lake-id="lake-level-155" data-lake-name="Keechelus"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-155" data-snow-id="snow-level-155" data-lake-name="Keechelus"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-155" data-chart-id="lake-levels-chart-155" data-lake-name="Keechelus"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Lake Chelan  </br>
+          <small>Chelan, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-156" data-lake-id="lake-level-156" data-lake-name="Lake Chelan"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-156" data-snow-id="snow-level-156" data-lake-name="Lake Chelan"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-156" data-chart-id="lake-levels-chart-156" data-lake-name="Lake Chelan"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Lake Owyhee  </br>
+          <small>Malheur, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-131" data-lake-id="lake-level-131" data-lake-name="Lake Owyhee"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-131" data-snow-id="snow-level-131" data-lake-name="Lake Owyhee"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-131" data-chart-id="lake-levels-chart-131" data-lake-name="Lake Owyhee"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Lake Shannon  </br>
+          <small>Skagit, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-157" data-lake-id="lake-level-157" data-lake-name="Lake Shannon"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-157" data-snow-id="snow-level-157" data-lake-name="Lake Shannon"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-157" data-chart-id="lake-levels-chart-157" data-lake-name="Lake Shannon"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Lookout Point  Lake</br>
+          <small>Lane, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-132" data-lake-id="lake-level-132" data-lake-name="Lookout Point"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-132" data-snow-id="snow-level-132" data-lake-name="Lookout Point"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-132" data-chart-id="lake-levels-chart-132" data-lake-name="Lookout Point"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Lost Creek  Lake</br>
+          <small>Jackson, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-133" data-lake-id="lake-level-133" data-lake-name="Lost Creek"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-133" data-snow-id="snow-level-133" data-lake-name="Lost Creek"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-133" data-chart-id="lake-levels-chart-133" data-lake-name="Lost Creek"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Mayfield  Lake</br>
+          <small>Lewis, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-158" data-lake-id="lake-level-158" data-lake-name="Mayfield"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-158" data-snow-id="snow-level-158" data-lake-name="Mayfield"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-158" data-chart-id="lake-levels-chart-158" data-lake-name="Mayfield"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Mckay  Lake</br>
+          <small>Umatilla, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-134" data-lake-id="lake-level-134" data-lake-name="Mckay"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-134" data-snow-id="snow-level-134" data-lake-name="Mckay"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-134" data-chart-id="lake-levels-chart-134" data-lake-name="Mckay"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Merwin  Lake</br>
+          <small>Clark, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-159" data-lake-id="lake-level-159" data-lake-name="Merwin"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-159" data-snow-id="snow-level-159" data-lake-name="Merwin"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-159" data-chart-id="lake-levels-chart-159" data-lake-name="Merwin"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Mossyrock Dam Lake</br>(Riffe Lake)</br>
+          <small>Lewis, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-160" data-lake-id="lake-level-160" data-lake-name="Mossyrock Dam (Riffe Lk)"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-160" data-snow-id="snow-level-160" data-lake-name="Mossyrock Dam (Riffe Lk)"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-160" data-chart-id="lake-levels-chart-160" data-lake-name="Mossyrock Dam (Riffe Lk)"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Ochoco  Lake</br>
+          <small>Crook, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-135" data-lake-id="lake-level-135" data-lake-name="Ochoco"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-135" data-snow-id="snow-level-135" data-lake-name="Ochoco"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-135" data-chart-id="lake-levels-chart-135" data-lake-name="Ochoco"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Phillips Lake  </br>
+          <small>Baker, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-136" data-lake-id="lake-level-136" data-lake-name="Phillips Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-136" data-snow-id="snow-level-136" data-lake-name="Phillips Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-136" data-chart-id="lake-levels-chart-136" data-lake-name="Phillips Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Prineville  Lake</br>
+          <small>Crook, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-137" data-lake-id="lake-level-137" data-lake-name="Prineville"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-137" data-snow-id="snow-level-137" data-lake-name="Prineville"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-137" data-chart-id="lake-levels-chart-137" data-lake-name="Prineville"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Rimrock  Lake</br>
+          <small>Yakima, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-161" data-lake-id="lake-level-161" data-lake-name="Rimrock"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-161" data-snow-id="snow-level-161" data-lake-name="Rimrock"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-161" data-chart-id="lake-levels-chart-161" data-lake-name="Rimrock"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Roosevelt Lake</br>(Grand Coulee Dam)</br>
+          <small>Grant, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-162" data-lake-id="lake-level-162" data-lake-name="Roosevelt (Grand Coulee Dam)"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-162" data-snow-id="snow-level-162" data-lake-name="Roosevelt (Grand Coulee Dam)"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-162" data-chart-id="lake-levels-chart-162" data-lake-name="Roosevelt (Grand Coulee Dam)"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Ross  Lake</br>
+          <small>Whatcom, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-163" data-lake-id="lake-level-163" data-lake-name="Ross"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-163" data-snow-id="snow-level-163" data-lake-name="Ross"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-163" data-chart-id="lake-levels-chart-163" data-lake-name="Ross"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Swift  Lake</br>
+          <small>Skamania, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-164" data-lake-id="lake-level-164" data-lake-name="Swift"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-164" data-snow-id="snow-level-164" data-lake-name="Swift"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-164" data-chart-id="lake-levels-chart-164" data-lake-name="Swift"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Thief Valley  Lake</br>
+          <small>Baker, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-138" data-lake-id="lake-level-138" data-lake-name="Thief Valley"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-138" data-snow-id="snow-level-138" data-lake-name="Thief Valley"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-138" data-chart-id="lake-levels-chart-138" data-lake-name="Thief Valley"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Timothy Lake  </br>
+          <small>Clackamas, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-139" data-lake-id="lake-level-139" data-lake-name="Timothy Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-139" data-snow-id="snow-level-139" data-lake-name="Timothy Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-139" data-chart-id="lake-levels-chart-139" data-lake-name="Timothy Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Unity  Lake</br>
+          <small>Baker, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-140" data-lake-id="lake-level-140" data-lake-name="Unity"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-140" data-snow-id="snow-level-140" data-lake-name="Unity"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-140" data-chart-id="lake-levels-chart-140" data-lake-name="Unity"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Upper Baker  Lake</br>
+          <small>Whatcom, WA</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-165" data-lake-id="lake-level-165" data-lake-name="Upper Baker"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-165" data-snow-id="snow-level-165" data-lake-name="Upper Baker"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-165" data-chart-id="lake-levels-chart-165" data-lake-name="Upper Baker"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Upper Klamath Lake  </br>
+          <small>Klamath, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-141" data-lake-id="lake-level-141" data-lake-name="Upper Klamath Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-141" data-snow-id="snow-level-141" data-lake-name="Upper Klamath Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-141" data-chart-id="lake-levels-chart-141" data-lake-name="Upper Klamath Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Wallowa Lake  </br>
+          <small>Wallowa, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-142" data-lake-id="lake-level-142" data-lake-name="Wallowa Lake"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-142" data-snow-id="snow-level-142" data-lake-name="Wallowa Lake"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-142" data-chart-id="lake-levels-chart-142" data-lake-name="Wallowa Lake"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Warm Springs  Lake</br>
+          <small>Malheur, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-143" data-lake-id="lake-level-143" data-lake-name="Warm Springs"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-143" data-snow-id="snow-level-143" data-lake-name="Warm Springs"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-143" data-chart-id="lake-levels-chart-143" data-lake-name="Warm Springs"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Wickiup  Lake</br>
+          <small>Deschutes, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-144" data-lake-id="lake-level-144" data-lake-name="Wickiup"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-144" data-snow-id="snow-level-144" data-lake-name="Wickiup"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-144" data-chart-id="lake-levels-chart-144" data-lake-name="Wickiup"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Willow Creek  Lake</br>
+          <small>Morrow, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-145" data-lake-id="lake-level-145" data-lake-name="Willow Creek"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-145" data-snow-id="snow-level-145" data-lake-name="Willow Creek"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-145" data-chart-id="lake-levels-chart-145" data-lake-name="Willow Creek"></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="row reservoirRow">
+      <div class="small-12 large-4 column">
+          <h4> Wolf Creek  Lake</br>
+          <small>Union, OR</small></h4>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="lake-level" id="lake-level-146" data-lake-id="lake-level-146" data-lake-name="Wolf Creek"></span></h3>
+      </div>
+      <div class="small-6 large-2 column">
+        <h3 class="text-center"><span class="snow-level" id="snow-level-146" data-snow-id="snow-level-146" data-lake-name="Wolf Creek"></span></h3>
+      </div>
+      <div class="small-12 large-4 column">
+        <div class="lake-levels-chart" id="lake-levels-chart-146" data-chart-id="lake-levels-chart-146" data-lake-name="Wolf Creek"></div>
+      </div>
+    </div>
+
+<div class="row">
+  <div class="small-12 column">
+	<p><b>About this project</b></p>
+	<p>OPB and EarthFix obtained reservoir storage data for all reservoirs currently tracked by the USDA's Natural Resources Conservation Service, as well as snow-water equivalent (a common snowpack measurement) for the region's snowpack measurement sites and hydrologic basins. Data </p>
+  </div>
+</div>
+
+<script src="js/fullChart.js"></script>
+<script src="js/project.js"></script>
+
+<script>
+
+  var docHeight = $(document).height();
+  $("html").css("height", docHeight );
+
+  var pymChild = new pym.Child({ polling: 1000 },{id: "lakelevelsgraphic"});
+
+</script>
+
+
+<div id="tooltip" class="hidden">
+        <p><span id="value"></span></p>
+</div>
+
+
+</body></html>

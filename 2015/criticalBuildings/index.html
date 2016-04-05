@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+	<head>
+
+	    <meta charset="utf-8">
+    	<title>Unprepared | Schools And Hospitals At Risk</title>
+	    <meta name="description" content="">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- ############################ JS LIBRARIES AND APP SCRIPTS ############################ -->
+
+		<!-- FONT AWESOME -->
+		<link href="http://www.opb.org/mustangs/css/font-awesome.min.css" rel="stylesheet">
+
+		
+		<!-- JQUERY -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+
+		<!-- GOOGLE MAPS -->
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true?key=AIzaSyBSZGyycuPZO0BBfJqO-RBFeKM7_icZUnk"></script>
+
+		<!-- FOUNDATION -->
+		<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.min.css" />
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/js/foundation.min.js"></script>
+
+		<!-- LEAFLET -->
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+
+		<!--ESRI LEAFLET -->
+        <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.3/esri-leaflet.js"></script>
+
+		<!-- BACKBONE, UNDERSCORE, JSON2 -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+		<script src="https://s3.amazonaws.com/earthfix/json2.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+
+		<!-- STYLESHEET -->
+		<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+		<!-- APP SCRIPTS -->
+		<script src="js/tsunami.js"></script>
+		<script src="js/critical.js"></script>
+		<!-- <script src="models.js"></script>
+		<script src="views.js"></script> -->
+		<script src="js/leaflet-pip.js"></script>
+		<script src="js/script.js"></script>
+
+
+		<script id="buildings-template" type="text/underscore-template">   
+ 
+			<% var building_style = "'width: 40% !important;'" 
+			   var str = properties.Collapse_Potential
+			%>
+
+			//COLLAPSE
+			
+			<% if (properties.Collapse_Potential !== "Very High (100%)" || properties.Collapse_Potential !== "High (>10%)" || properties.Collapse_Potential !== "Moderate (>1%)" || properties.Collapse_Potential !== "Low (<1%)") {
+				var collapse_style = "'background-color: #666; color: #eee; width: 20% !important;'"
+			} %> 			
+			<% if (properties.Collapse_Potential == 'Very High (100%)') {
+				var collapse_style = "'background-color: #F26C4F; width: 20% !important;'"
+			} %> 
+			<% if (properties.Collapse_Potential == 'High (>10%)') {
+				var collapse_style = "'background-color: #F68E55; width: 20% !important;'"
+			} %> 
+			<% if (properties.Collapse_Potential == 'Moderate (>1%)') {
+				var collapse_style = "'background-color: #FFF79A; width: 20% !important;'"
+			} %> 					
+			<% if (properties.Collapse_Potential == 'Low (<1%)') {
+				var collapse_style = "'background-color: #C4DF9B; width: 20% !important;'"
+			} %>
+
+
+			//SEISMICITY
+			<% if (properties.Seismicity == 'Very High') {
+				var seismicity_style = "'background-color: #F26C4F; width: 20% !important;'"
+			} %> 
+			<% if (properties.Seismicity == 'High') {
+				var seismicity_style = "'background-color: #F68E55; width: 20% !important;'"
+			} %> 
+			<% if (properties.Seismicity == 'Moderate') {
+				var seismicity_style = "'background-color: #FFF79A; width: 20% !important;'"
+			} %> 					
+			<% if (properties.Seismicity == 'Low') {
+				var seismicity_style = "'background-color: #C4DF9B; width: 20% !important;'"
+			} %>
+
+			// SOIL
+			<% if (properties.Soil == 'E' || properties.Soil == 'F') {
+				var soil_style = "'background-color: #F26C4F; width: 10% !important;'"
+			} %> 
+			<% if (properties.Soil == 'D') {
+				var soil_style = "'background-color: #F68E55; width: 10% !important;'"
+			} %> 
+			<% if (properties.Soil == 'C') {
+				var soil_style = "'background-color: #FFF79A; width: 10% !important;'"
+			} %> 					
+			<% if (properties.Soil == 'B' || properties.Soil == 'A') {
+				var soil_style = "'background-color: #C4DF9B; width: 10% !important;'"
+			} %>
+
+		      <td style=<%= building_style %> class="small-6">  <%= properties.Name %> (bldg <%= properties.BuildingUniqueID.substring(10, 11) %> ) <small><a href=" <%= properties.hyperli %>">Full report</a></small></td>
+
+		      <td style=<%= collapse_style %>> <%= properties.Collapse_Potential %> </td>
+
+		      <td class="dropped" style=<%= seismicity_style %>> <%= properties.Seismicity %> </td>
+
+		      <td class="dropped" style=<%= soil_style %>> <%= properties.Soil %> </td>
+
+		</script>
+
+
+	<!-- NPR DS -->
+	<script type="text/javascript">(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = '//stream.publicbroadcasting.net/analytics/aae0.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();</script>
+
+	</head>
+	<body>
+					          <datalist id="cities">
+					          	<option value="Adams">
+								<option value="Adrian">
+								<option value="Agness">
+								<option value="Albany">
+								<option value="Aloha">
+								<option value="Alsea">
+								<option value="Alvadore">
+								<option value="Amity">
+								<option value="Arlington">
+								<option value="Ashland">
+								<option value="Astoria">
+								<option value="Athena">
+								<option value="Aumsville">
+								<option value="Aurora">
+								<option value="Azalea">
+								<option value="Baker City">
+								<option value="Bandon">
+								<option value="Banks">
+								<option value="Bay City">
+								<option value="Beaver">
+								<option value="Beavercreek">
+								<option value="Beaverton">
+								<option value="Bend">
+								<option value="Blachly">
+								<option value="Blaine">
+								<option value="Blue River">
+								<option value="Bly">
+								<option value="Boardman">
+								<option value="Bonanza">
+								<option value="Boring">
+								<option value="Brightwood">
+								<option value="Brookings">
+								<option value="Brooks">
+								<option value="Brownsville">
+								<option value="Burns">
+								<option value="Butte Falls">
+								<option value="Buxton">
+								<option value="Camas Valley">
+								<option value="Canby">
+								<option value="Cannon Beach">
+								<option value="Canyon City">
+								<option value="Canyonville">
+								<option value="Carlton">
+								<option value="Cascade Locks">
+								<option value="Cascadia">
+								<option value="Cave Junction">
+								<option value="Central Point">
+								<option value="Chiloquin">
+								<option value="Christmas Valley">
+								<option value="Clackamas">
+								<option value="Clatskanie">
+								<option value="Cloverdale">
+								<option value="Coburg">
+								<option value="Colton">
+								<option value="Columbia City">
+								<option value="Condon">
+								<option value="Coos Bay">
+								<option value="Coquille">
+								<option value="Corbett">
+								<option value="Cornelius">
+								<option value="Corvallis">
+								<option value="Cottage Grove">
+								<option value="Cove">
+								<option value="Crabtree">
+								<option value="Crane">
+								<option value="Crawfordsville">
+								<option value="Crescent">
+								<option value="Crescent Lake">
+								<option value="Creswell">
+								<option value="Culver">
+								<option value="Curtin">
+								<option value="Dallas">
+								<option value="Damascus">
+								<option value="Days Creek">
+								<option value="Dayton">
+								<option value="Dayville">
+								<option value="Deadwood">
+								<option value="Deer Island">
+								<option value="Detroit">
+								<option value="Dexter">
+								<option value="Diamond Lake">
+								<option value="Donald">
+								<option value="Drain">
+								<option value="Dufur">
+								<option value="Dundee">
+								<option value="Eagle Creek">
+								<option value="Eagle Point">
+								<option value="Echo">
+								<option value="Eddyville">
+								<option value="Elgin">
+								<option value="Elkton">
+								<option value="Elmira">
+								<option value="Enterprise">
+								<option value="Estacada">
+								<option value="Eugene">
+								<option value="Fairview">
+								<option value="Falls City">
+								<option value="Florence">
+								<option value="Forest Grove">
+								<option value="Fossil">
+								<option value="Gales Creek">
+								<option value="Gardiner">
+								<option value="Garibaldi">
+								<option value="Gaston">
+								<option value="Gates">
+								<option value="Gearhart">
+								<option value="Gervais">
+								<option value="Gilchrist">
+								<option value="Gladstone">
+								<option value="Glendale">
+								<option value="Gleneden Beach">
+								<option value="Glide">
+								<option value="Goble">
+								<option value="Gold Beach">
+								<option value="Gold Hill">
+								<option value="Government Camp">
+								<option value="Grand Ronde">
+								<option value="Grants Pass">
+								<option value="Grass Valley">
+								<option value="Gresham">
+								<option value="Haines">
+								<option value="Halfway">
+								<option value="Halsey">
+								<option value="Harrisburg">
+								<option value="Helix">
+								<option value="Heppner">
+								<option value="Hermiston">
+								<option value="Hillsboro">
+								<option value="Hines">
+								<option value="Hood River">
+								<option value="Hubbard">
+								<option value="Huntington">
+								<option value="Imbler">
+								<option value="Independence">
+								<option value="Ione">
+								<option value="Irrigon">
+								<option value="Island City">
+								<option value="Jacksonville">
+								<option value="Jasper">
+								<option value="Jefferson">
+								<option value="John Day">
+								<option value="Jordan Valley">
+								<option value="Joseph">
+								<option value="Junction City">
+								<option value="Keizer">
+								<option value="Keno">
+								<option value="King City">
+								<option value="Klamath Falls">
+								<option value="Knappa">
+								<option value="La Grande">
+								<option value="La Pine">
+								<option value="Lafayette">
+								<option value="Lake Oswego">
+								<option value="Lakeside">
+								<option value="Lakeview">
+								<option value="Langlois">
+								<option value="Leaburg">
+								<option value="Lebanon">
+								<option value="Lexington">
+								<option value="Lincoln City">
+								<option value="Logsden">
+								<option value="Long Creek">
+								<option value="Lorane">
+								<option value="Lostine">
+								<option value="Lowell">
+								<option value="Lyons">
+								<option value="Madras">
+								<option value="Malin">
+								<option value="Manzanita">
+								<option value="Mapleton">
+								<option value="Marcola">
+								<option value="Maupin">
+								<option value="Mckenzie Bridge">
+								<option value="McMinnville">
+								<option value="Medford">
+								<option value="Merrill">
+								<option value="Mill City">
+								<option value="Millersburg">
+								<option value="Milton-Freewater">
+								<option value="Milwaukie">
+								<option value="Mitchell">
+								<option value="Molalla">
+								<option value="Monmouth">
+								<option value="Monroe">
+								<option value="Monument">
+								<option value="Moro">
+								<option value="Mosier">
+								<option value="Mount Angel">
+								<option value="Mount Hood Parkdale">
+								<option value="Mount Vernon">
+								<option value="Mulino">
+								<option value="Myrtle Creek">
+								<option value="Myrtle Point">
+								<option value="Nehalem">
+								<option value="Neskowin">
+								<option value="Netarts">
+								<option value="Newberg">
+								<option value="Newport">
+								<option value="North Bend">
+								<option value="North Plains">
+								<option value="North Powder">
+								<option value="Nyssa">
+								<option value="Oakland">
+								<option value="Oakridge">
+								<option value="Oceanside">
+								<option value="Odell">
+								<option value="Ontario">
+								<option value="Oregon City">
+								<option value="Otis">
+								<option value="Pacific City">
+								<option value="Paisley">
+								<option value="Parkdale">
+								<option value="Pendleton">
+								<option value="Philomath">
+								<option value="Phoenix">
+								<option value="Pilot Rock">
+								<option value="Pistol River">
+								<option value="Pleasant Hill">
+								<option value="Port Orford">
+								<option value="Portland">
+								<option value="Powell Butte">
+								<option value="Powers">
+								<option value="Prairie City">
+								<option value="Prineville">
+								<option value="Prospect">
+								<option value="Rainier">
+								<option value="Redmond">
+								<option value="Reedsport">
+								<option value="Richland">
+								<option value="Riddle">
+								<option value="Rockaway">
+								<option value="Rockaway Beach">
+								<option value="Rogue River">
+								<option value="Rose Lodge">
+								<option value="Roseburg">
+								<option value="Rufus">
+								<option value="Salem">
+								<option value="Sandlake">
+								<option value="Sandy">
+								<option value="Santiam">
+								<option value="Scappoose">
+								<option value="Scio">
+								<option value="Scotts Mills">
+								<option value="Scottsburg">
+								<option value="Seal Rock">
+								<option value="Seaside">
+								<option value="Seneca">
+								<option value="Shady Cove">
+								<option value="Shedd">
+								<option value="Sheridan">
+								<option value="Sherwood">
+								<option value="Siletz">
+								<option value="Silver Lake">
+								<option value="Silverton">
+								<option value="Sisters">
+								<option value="Sixes">
+								<option value="Spray">
+								<option value="Springfield">
+								<option value="St Helens">
+								<option value="St Paul">
+								<option value="Stanfield">
+								<option value="Stayton">
+								<option value="Sublimity">
+								<option value="Summerville">
+								<option value="Sumpter">
+								<option value="Sunriver">
+								<option value="Sutherlin">
+								<option value="Sweet Home">
+								<option value="Swisshome">
+								<option value="Talent">
+								<option value="Tangent">
+								<option value="Tenmile">
+								<option value="Terrebonne">
+								<option value="The Dalles">
+								<option value="Tigard">
+								<option value="Tillamook">
+								<option value="Tiller">
+								<option value="Timber">
+								<option value="Toledo">
+								<option value="Trail">
+								<option value="Troutdale">
+								<option value="Tualatin">
+								<option value="Turner">
+								<option value="Tygh Valley">
+								<option value="Umatilla">
+								<option value="Umpqua">
+								<option value="Union">
+								<option value="Unity">
+								<option value="Vale">
+								<option value="Veneta">
+								<option value="Vernonia">
+								<option value="Vida">
+								<option value="Waldport">
+								<option value="Wallowa">
+								<option value="Walton">
+								<option value="Warm Springs">
+								<option value="Warren">
+								<option value="Warrenton">
+								<option value="Wasco">
+								<option value="Welches">
+								<option value="West Linn">
+								<option value="Westfir">
+								<option value="Westlake">
+								<option value="Weston">
+								<option value="White City">
+								<option value="Willamina">
+								<option value="Williams">
+								<option value="Wilsonville">
+								<option value="Winchester">
+								<option value="Winchester Bay">
+								<option value="Winston">
+								<option value="Wolf Creek">
+								<option value="Woodburn">
+								<option value="Yachats">
+								<option value="Yamhill">
+								<option value="Yoncalla">
+							  </datalist>
+
+
+
+
+		<div style="" class="container">
+
+<!-- 		<div id="header" class="dropped">
+  			<a href="http://www.opb.org/news/series/unprepared/">	<img width="100" src="http://opb-mini-sites.s3.amazonaws.com/mustangs/images/OPB_white.png" />
+  			<h4 class="header-title">Unprepared:</h4>
+ 			<h5 class="header-subtitle">Will we be ready for the megaquake?</h5></a>
+		</div>
+ -->
+
+			<div id="map-container">
+			</div>
+
+			<div id="locate-container">
+
+				<div class="row">
+			      <div class="small-10 small-offset-1 medium-6 medium-offset-3">
+			        <center>
+			          <!-- <h5 style="color: #ccc; margin-top: 5%;">EXPLORE</h5> -->
+			          <h2 class="title">Find Buildings Nearby</h2>
+			          <p class="desc">Are you in the tsunami zone? How resilient are nearby schools? Find out what the next major earthquake would mean for critical buildings in Oregon.</p>
+			        </center>
+			      </div>
+			   	</div>
+
+				<form id="location-search">
+
+					<div class="row">
+					    <div class="large-12">
+					      <div class="row collapse">
+					        <div class="small-10 small-offset-1 medium-8 medium-offset-2 columns">
+					          <input id="city_selection" list="cities" type="text" placeholder="Enter full address or click to select a city">
+					        </div>
+
+							<div class="row">
+					          <div id="buildings-search" class="small-10 small-offset-1 medium-8 medium-offset-2 button"><i class="fa fa-search fa-lg" style="color: #fff; cursor: pointer; margin-right: 4px;"></i>Enter address above and click here</div>
+	 				       	</div>
+				     
+					      <div class="row">
+					        <div class="small-6 small-offset-3" style="text-align: center; padding: 8px; margin-top: -12px; color: #fff;">OR</div>
+					      </div>
+
+					        <div id="LocateMe" class="small-10 small-offset-1 medium-6 medium-offset-3 button">
+					        	<i class="fa fa-location-arrow fa-lg" style="color: #fff; cursor: pointer; margin-right: 4px;"></i>
+					        	Use your current location
+					    	</div>
+
+					        <!-- <div id="MapEntry" class="button"><i class="fa fa-map-marker" style="color: #fff; cursor: pointer; float: left; margin-right: 4px;"></i>Explore map</div>
+					        -->
+
+					      </div>
+					    </div>
+					</div>
+
+				</form>
+			
+			</div>
+
+		<div class="row">
+			<div id="buildings-container">
+
+			<div class="" style="padding: 8px;">
+				<p style="margin-bottom: 0px;">An estimated<span id="box-info"></span>critical buildings nearby were rated high risk of collapse. Note that this an estimate: buildings could be added, demolished or retrofitted since the last survey. <a href="http://opb-news-interactives.s3.amazonaws.com/news/2015/09September/criticalBuildings/index.html">Search somewhere else.</a><p>
+			</div>
+
+			<div class="row">
+			<div id="building-count"></div>
+			</div>
+
+			<div id="building-map">
+
+			</div>
+
+			<div id="table-container">
+				<table id="table-headers">
+				  <thead>
+				    <tr>
+				      <th style="width: 40% !important;">Site of building</th>				   
+				      <th style="width: 20% !important;">Collapse Potential</th>
+				      <th class="dropped seismicity" style="width: 20% !important;">Seismic activity</th>
+				      <th class="dropped soil" style="width: 10% !important;">Soil type</th>
+				    </tr>
+				  </thead>
+				</table>
+				
+				<div id="buildings-table">
+					<table id="buildings-list">
+					</table>	
+
+				</div>
+
+				<div class="footer">
+				<a href="http://opb-news-interactives.s3.amazonaws.com/news/2015/09September/criticalBuildings/about.html"><span id="about_button" style="color: #eee"><b>ABOUT</b></span></a> <p>| Was your school retrofitted? <a href="http://www.oregongeology.org/sub/projects/rvs/activity-updates/status.html" target="_blank">Find out.</a></p>
+				</div>
+
+			</div>
+
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var _sf_async_config={uid:33583,domain:"opb.org"};
+			(function(){
+			  function loadChartbeat() {
+			    window._sf_endpt=(new Date()).getTime();
+			    var e = document.createElement('script');
+			    e.setAttribute('language', 'javascript');
+			    e.setAttribute('type', 'text/javascript');
+			    e.setAttribute('src',
+			       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+			       "js/chartbeat.js");
+			    document.body.appendChild(e);
+			  }
+			  var oldonload = window.onload;
+			  window.onload = (typeof window.onload != 'function') ?
+			     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+			})();
+		</script>
+	</body>
+
+
+</html>
